@@ -10,6 +10,8 @@
 </head>
 <body>
 
+<div class="wip" role="note">Work in progress</div>
+
 <header>
   <div class="wrap">
     <img class="logo" src="assets/logo.svg" alt="Smart E-Graphs logo">
@@ -24,12 +26,37 @@
 <main>
   <div class="wrap">
 
+    <h2 id="idea">Key Idea</h2>
+    <p class="lead">
+      E-graphs store bare equalities: they do not know <em>why</em> an equality holds,
+      <em>when</em> it applies, or how it relates to facts derived elsewhere, so reasoning
+      tools compensate with costly workarounds. Smart e-graphs move that semantic
+      knowledge into the data structure itself: proving more, faster.
+    </p>
+
     <h2 id="about">E-Graphs</h2>
     <p>
       E-graphs compactly represent large spaces of equivalent terms, and they sit at the
       core of automated theorem provers, SMT solvers, and optimizing compilers. The
       classical data structure is built around one kind of fact: unconditional equality
-      between terms. Other aspects of the reasoning, such as terms being
+      between terms. For example, the e-graph below contains the atoms <code>a</code> and
+      <code>b</code> and the applications <code>f(a)</code> and <code>f(b)</code>.
+      Rectangles are <em>e-nodes</em>, one per term; circles are <em>e-classes</em>, the
+      sets of e-nodes known to be equal; and each arrow connects an e-node to the e-class
+      of its argument. Initially every e-node sits in its own e-class (a). Asserting
+      <code>a = b</code> merges their e-classes (b), and by congruence the e-graph
+      discovers on its own that <code>f(a) = f(b)</code>, merging those e-classes as
+      well (c).
+    </p>
+    <figure class="fig-run fig-wide">
+      <img src="assets/egraph.png"
+           alt="Three states of an e-graph with atoms a and b and applications f(a) and
+                f(b): the initial state with four e-classes, the intermediate state where
+                a and b share an e-class, and the final state where f(a) and f(b) are
+                also merged">
+    </figure>
+    <p>
+      Other aspects of the reasoning, such as terms being
       <span class="kw">different</span>, equalities holding <span class="kw">under
       assumptions</span>, or facts being discovered in <span class="kw">separate
       contexts</span>, are not part of the data structure itself.
