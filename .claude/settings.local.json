@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" -L --max-time 10 https://guidosalvaneschi.com)",
+      "Bash(curl -s -L --max-time 10 https://programming-group.com/)",
+      "Bash(python3 -m http.server 8769)",
+      "Bash(curl -s -o /dev/null -w \"page -> %{http_code}\\\\n\" http://localhost:8769/)",
+      "Bash(kill %1)",
+      "Bash(node -e ' *)"
+    ]
+  }
+}

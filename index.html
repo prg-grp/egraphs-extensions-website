@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart E-Graphs</title>
+<meta name="description" content="Smart e-graphs: equality is just the beginning. E-graphs that understand disequality, assumptions, and branching proofs, for provers that prove more, faster.">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <img class="logo" src="assets/logo.svg" alt="Smart E-Graphs logo">
+    <div>
+      <h1>Smart E-Graphs</h1>
+      <p class="tagline">Equality is just the beginning:
+        optimizations for semantic-aware e-graphs.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <h2 id="about">What are E-Graphs?</h2>
+    <p>
+      E-graphs compactly represent large spaces of equivalent terms, and they sit at the
+      core of automated theorem provers, SMT solvers, and optimizing compilers. The
+      classical data structure is built around one kind of fact: unconditional equality
+      between terms. Other aspects of the reasoning, such as terms being
+      <span class="kw">different</span>, equalities holding <span class="kw">under
+      assumptions</span>, or facts being discovered in <span class="kw">separate
+      contexts</span>, are not part of the data structure itself.
+      This semantic information is traditionally managed by the tools around the e-graph,
+      for example by encoding it through equalities or by maintaining one e-graph per
+      context.
+    </p>
+  
+    <h2 id="motivation">What are the challenges?</h2>
+    <p>
+      Consider a verifier analyzing the following function, which adds the distances
+      <code>f(dx)</code> and <code>f(dy)</code> of two differences, doubling by a bit
+      shift when the operands are known to be equal. Each conditional splits the
+      reasoning into branches: the first branch assumes <code>dx = dy</code>, the others
+      assume <code>dx &ne; dy</code> together with <code>da = db</code> or
+      <code>da &ne; db</code>. The nested scopes form a tree of contexts, each carrying
+      its own set of facts.
+    </p>
+    <figure class="fig-run">
+      <img src="assets/example.svg"
+           alt="The dist_diffs function with nested branch scopes, and the tree of
+                contexts with assumptions dx = dy, dx ≠ dy, da = db, and da ≠ db,
+                each aligned with its scope in the code">
+      <figcaption>Each branch introduces its own assumptions, forming a tree of contexts
+      aligned with the scopes of the code.</figcaption>
+    </figure>
+    <p>
+      A classical e-graph has no place for any of this. The disequality
+      <code>dx &ne; dy</code> cannot be stated, so it must be tracked outside the data
+      structure. Each branch needs its own equivalence relation, so tools maintain one
+      full e-graph per branch, even though the branches agree on most of what they know.
+      And once the branches have been explored, there is no operation to combine what they
+      learned. As programs and proofs branch further, the duplicated and replayed work
+      compounds.
+    </p>
+    <p>
+      Representing difference, assumptions, and contexts directly in the data structure
+      removes these costs: facts can be <span class="kw-alt">shared</span> across proof
+      branches rather than replicated, knowledge from independently explored contexts can
+      be <span class="kw-alt">composed</span>, and proof exploration can be organized
+      <span class="kw-alt">in parallel</span>. The extensions below develop this idea step
+      by step, each with formal correctness guarantees and measurable performance gains.
+    </p>
+
+    <h2 id="extensions">Semantic Extensions</h2>
+
+    <article class="ext">
+      <div class="ext-body">
+        <h3>
+          <span class="ext-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="5" y1="9.5" x2="19" y2="9.5"/><line x1="5" y1="14.5" x2="19" y2="14.5"/><line x1="15.5" y1="4.5" x2="8.5" y2="19.5"/></svg></span>
+          Disequality Reasoning
+        </h3>
+        <p>E-graphs that natively know when two terms must differ. Refutation becomes a
+        first-class operation instead of an encoding trick, with a simpler metatheory and
+        better performance than the embeddings used in SMT solvers.
+        <a href="#pub-diseq">Dis/Equality Graphs, POPL 2025</a>.</p>
+      </div>
+      <svg class="ext-img diagram" viewBox="0 0 120 70" aria-hidden="true">
+        <rect class="eclass" x="6" y="22" width="30" height="22" rx="11"/>
+        <rect class="eclass" x="84" y="22" width="30" height="22" rx="11"/>
+        <circle class="enode" cx="21" cy="33" r="5"/>
+        <circle class="enode" cx="99" cy="33" r="5"/>
+        <g class="fg">
+          <line x1="48" y1="28" x2="72" y2="28"/>
+          <line x1="48" y1="38" x2="72" y2="38"/>
+          <line x1="66" y1="21" x2="54" y2="45"/>
+        </g>
+      </svg>
+    </article>
+
+    <article class="ext">
+      <div class="ext-body">
+        <h3>
+          <span class="ext-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7.5 12 C12 12 12 5.5 16.5 5.5"/><path d="M7.5 12 C12 12 12 18.5 16.5 18.5"/><circle cx="5" cy="12" r="2.5" fill="currentColor" stroke="none"/><circle cx="19" cy="5.5" r="2.5" fill="currentColor" stroke="none"/><circle cx="19" cy="18.5" r="2.5" fill="currentColor" stroke="none"/></svg></span>
+          Conditional Reasoning
+        </h3>
+        <p>Equalities rarely hold unconditionally. Versioned e-graphs encode a whole family
+        of equivalence relations at once, one per set of assumptions, so proof branches share
+        the facts they agree on instead of replicating them.
+        <a href="#pub-versioned">Versioned E-Graphs, PLDI 2026</a>.</p>
+      </div>
+      <svg class="ext-img diagram" viewBox="0 0 120 70" aria-hidden="true">
+        <path class="edge" d="M32 35 C50 35 54 16 86 16"/>
+        <path class="edge" d="M32 35 C50 35 54 54 86 54"/>
+        <g class="packet">
+          <path d="M32 35 C50 35 54 16 86 16" pathLength="100"/>
+          <path d="M32 35 C50 35 54 54 86 54" pathLength="100"/>
+        </g>
+        <g class="vbox">
+          <rect x="8" y="25" width="26" height="20" rx="7"/>
+          <rect x="86" y="6" width="26" height="20" rx="7"/>
+          <rect x="86" y="44" width="26" height="20" rx="7"/>
+        </g>
+        <g class="vlabel" text-anchor="middle">
+          <text x="21" y="39">E&#8320;</text>
+          <text x="99" y="20">E&#8321;</text>
+          <text x="99" y="58">E&#8322;</text>
+        </g>
+      </svg>
+    </article>
+
+    <article class="ext">
+      <div class="ext-body">
+        <h3>
+          <span class="ext-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4 h9 l-9 9 h9"/><path d="M4 14 h6 l-6 6 h6"/></svg></span>
+          Lazy Reasoning
+        </h3>
+        <p>Equivalence relations form a lattice. Lazy meet and join operations compose the
+        knowledge of independently explored contexts on demand, touching only the equalities
+        a query actually needs. <strong>In progress</strong>.</p>
+      </div>
+      <svg class="ext-img diagram" viewBox="0 0 120 70" aria-hidden="true">
+        <g class="edge">
+          <line x1="60" y1="12" x2="26" y2="35"/>
+          <line x1="60" y1="12" x2="94" y2="35"/>
+          <line x1="26" y1="35" x2="60" y2="58"/>
+          <line x1="94" y1="35" x2="60" y2="58"/>
+        </g>
+        <g class="packet">
+          <path d="M60 12 L26 35" pathLength="100"/>
+          <path d="M60 12 L94 35" pathLength="100"/>
+          <path d="M26 35 L60 58" pathLength="100" style="animation-delay: -1.2s"/>
+          <path d="M94 35 L60 58" pathLength="100" style="animation-delay: -1.2s"/>
+        </g>
+        <g class="vbox">
+          <rect x="38" y="2" width="44" height="20" rx="7"/>
+          <rect x="13" y="25" width="26" height="20" rx="7"/>
+          <rect x="81" y="25" width="26" height="20" rx="7"/>
+          <rect x="38" y="48" width="44" height="20" rx="7"/>
+        </g>
+        <g class="vlabel" text-anchor="middle">
+          <text x="60" y="16">E&#8321;&#8743;E&#8322;</text>
+          <text x="26" y="39">E&#8321;</text>
+          <text x="94" y="39">E&#8322;</text>
+          <text x="60" y="62">E&#8321;&#8744;E&#8322;</text>
+        </g>
+      </svg>
+    </article>
+
+    <article class="ext">
+      <div class="ext-body">
+        <h3>
+          <span class="ext-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6 h8 m0 0 l-3 -3 m3 3 l-3 3"/><path d="M3 12 h8 m0 0 l-3 -3 m3 3 l-3 3"/><path d="M3 18 h8 m0 0 l-3 -3 m3 3 l-3 3"/><line x1="17.5" y1="4" x2="17.5" y2="20"/></svg></span>
+          Parallel Reasoning
+        </h3>
+        <p>The lattice structure exposes which reasoning tasks are independent. Scheduling
+        proof exploration as parallel tasks over a lattice of e-graphs turns semantic
+        awareness into raw speed. <strong>In progress</strong>.</p>
+      </div>
+      <svg class="ext-img diagram" viewBox="0 0 120 70" aria-hidden="true">
+        <g class="vbox">
+          <rect x="6" y="4" width="26" height="20" rx="7"/>
+          <rect x="6" y="25" width="26" height="20" rx="7"/>
+          <rect x="6" y="46" width="26" height="20" rx="7"/>
+          <rect x="88" y="4" width="24" height="62" rx="7"/>
+        </g>
+        <g class="vlabel" text-anchor="middle">
+          <text x="19" y="18">E&#8321;</text>
+          <text x="19" y="39">E&#8322;</text>
+          <text x="19" y="60">E&#8323;</text>
+          <text x="100" y="40" font-size="15">&#8744;</text>
+        </g>
+        <g class="edge">
+          <path d="M38 14 h42 m0 0 l-6 -5 m6 5 l-6 5"/>
+          <path d="M38 35 h42 m0 0 l-6 -5 m6 5 l-6 5"/>
+          <path d="M38 56 h42 m0 0 l-6 -5 m6 5 l-6 5"/>
+        </g>
+        <g class="packet">
+          <path d="M38 14 h42" pathLength="100"/>
+          <path d="M38 35 h42" pathLength="100" style="animation-delay: -0.8s"/>
+          <path d="M38 56 h42" pathLength="100" style="animation-delay: -1.6s"/>
+        </g>
+      </svg>
+    </article>
+
+    <h2 id="publications">Publications</h2>
+
+    <!-- <article class="pub" id="pub-lattices">
+      <span class="badge submission">Under submission</span>
+      <h3>Where Forks Meet and Join: Lattices of Union-Finds</h3>
+      <p class="venue">Draft under double-blind review, 2026</p>
+      <p class="links">
+        <a href="publications/2026-lattices-of-union-finds.pdf">PDF</a>
+      </p>
+      <details>
+        <summary>Abstract</summary>
+        <p>Automated provers reason about equality under many different assumptions, which
+        induce a family of related equivalence relations over the same terms. Existing
+        extensions to union-finds, and e-graphs built on top, support different equivalence
+        relations over the same terms, but do not support composing the relations induced by
+        independently derived contexts without replaying work or duplicating relations.
+        Based on the observation that equivalence relations form a lattice, this paper
+        introduces two operations: combining relations by the equivalence closure of their
+        union (their meet), and extracting the equalities common across multiple relations by
+        intersection (their join). A lazy extension of versioned union-finds realizes both
+        operations alongside version forking, with proofs of correctness and complexity. The
+        cost of the operations scales as roughly n<sup>1.5</sup> on average against
+        n<sup>2</sup> for the eager variants, with at most 12% runtime overhead.</p>
+      </details>
+    </article> -->
+
+    <article class="pub" id="pub-versioned">
+      <span class="badge published">PLDI 2026</span>
+      <h3>Versioned E-Graphs</h3>
+      <p class="authors">Jahrim Gabriele Cesario, George Zakhour, Pascal Weisenburger, Guido Salvaneschi</p>
+      <p class="venue">Proc. ACM Program. Lang. 10, PLDI, Article 171, June 2026</p>
+      <p class="links">
+        <a href="publications/2026-versioned-egraphs.pdf">PDF</a>
+        <a href="https://doi.org/10.1145/3808249">DOI</a>
+      </p>
+      <details>
+        <summary>Abstract</summary>
+        <p>E-graphs are an efficient encoding for discovering and maintaining sets of
+        equalities. In several scenarios, equalities may hold only conditionally, i.e., under
+        certain assumptions: in automated provers the proof is often split into multiple
+        branches, each considering a different set of equalities. Traditional e-graphs can
+        only encode a single set of equalities at a time, so conditional equalities are
+        handled by maintaining multiple e-graphs, replicating the equalities shared among
+        branches. Versioned e-graphs efficiently encode multiple equivalence sets at the same
+        time, maximizing shared information among them. Compared to widely-adopted solutions
+        that maintain multiple e-graphs, versioned e-graphs are up to 5&ndash;30% more memory
+        efficient and up to 4&times; faster, especially when solution spaces are large both
+        in explored program terms and number of branches.</p>
+      </details>
+    </article>
+
+    <article class="pub" id="pub-diseq">
+      <span class="badge published">POPL 2025</span>
+      <h3>Dis/Equality Graphs</h3>
+      <p class="authors">George Zakhour, Pascal Weisenburger, Jahrim Gabriele Cesario, Guido Salvaneschi</p>
+      <p class="venue">Proc. ACM Program. Lang. 9, POPL, Article 77, January 2025</p>
+      <p class="links">
+        <a href="publications/2025-disequality-graphs.pdf">PDF</a>
+        <a href="https://doi.org/10.1145/3704913">DOI</a>
+      </p>
+      <details>
+        <summary>Abstract</summary>
+        <p>In many applications it is necessary to reason about disequality of terms as well
+        as equality. While disequality reasoning can be encoded, direct support for
+        disequalities increases performance and simplifies the metatheory. This paper
+        develops an implementation-independent framework to formally reason about e-graphs,
+        proving for the first time the equivalence of e-graphs to the closure of the
+        equivalence relation they encode. It presents the first formalization of an e-graph
+        extension that directly supports disequalities, with an analytical result about their
+        superior efficiency compared to common embedding techniques. The approach is
+        implemented as an extension to egg and evaluated in an SMT solver and an automated
+        theorem prover, where direct support for disequalities outperforms encodings based on
+        equality embedding.</p>
+      </details>
+    </article>
+
+    <!-- <h2 id="people">People</h2>
+    <ul class="people">
+      <li><a href="https://programming-group.com/members/cesario">Jahrim Gabriele Cesario</a> <span class="affil">&middot; University of St. Gallen</span></li>
+      <li><a href="https://programming-group.com/members/zakhour">George Zakhour</a> <span class="affil">&middot; University of St. Gallen</span></li>
+      <li><a href="https://programming-group.com/members/weisenburger">Pascal Weisenburger</a> <span class="affil">&middot; University of St. Gallen</span></li>
+      <li><a href="https://programming-group.com/members/salvaneschi">Guido Salvaneschi</a> <span class="affil">&middot; University of St. Gallen</span></li>
+    </ul> -->
+
+  </div>
+</main>
+
+<footer>
+  <a href="https://programming-group.com/">Programming Group</a> &middot; University of St. Gallen
+</footer>
+
+</body>
+</html>
