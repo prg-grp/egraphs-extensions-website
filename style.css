@@ -140,6 +140,8 @@ header .wrap {
   animation: heroGlow 1.8s ease-out 3.08s both;
 }
 @keyframes heroGlow { from { opacity: 0; } to { opacity: 0.55; } }
+/* #hero-logo-slot reserves the logo's box so injecting the SVG causes no layout shift */
+#hero-logo-slot,
 .hero-logo {
   display: block;
   height: calc(28px * var(--logo-scale));
