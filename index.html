@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Smart E-Graphs</title>
 <meta name="description" content="Smart e-graphs: equality is just the beginning. E-graphs that understand disequality, assumptions, and branching proofs, for provers that prove more, faster.">
-<link rel="stylesheet" href="assets/style.css">
-<link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/svg+xml" href="assets/logo-base.svg">
 </head>
 <body>
 
@@ -14,25 +14,27 @@
 
 <header>
   <div class="wrap">
-    <img class="logo" src="assets/logo.svg" alt="Smart E-Graphs logo">
-    <div>
-      <h1>Smart E-Graphs</h1>
-      <p class="tagline">Equality is just the beginning:
-        optimizations for semantic-aware e-graphs.</p>
-    </div>
+    <img class="topbar-logo" src="assets/logo-type2.svg" alt="Smart E-Graphs">
   </div>
 </header>
 
 <main>
   <div class="wrap">
 
-    <h2 id="idea">Key Idea</h2>
-    <p class="lead">
-      E-graphs store bare equalities: they do not know <em>why</em> an equality holds,
-      <em>when</em> it applies, or how it relates to facts derived elsewhere, so reasoning
-      tools compensate with costly workarounds. Smart e-graphs move that semantic
-      knowledge into the data structure itself: proving more, faster.
-    </p>
+    <section class="hero">
+      <span id="hero-logo-slot"></span>
+      <noscript><img class="hero-logo" src="assets/logo-type2.svg" alt="Smart E-Graphs"></noscript>
+      <p class="tagline">Equality is just the beginning: <span class="keyword-alt">Semantic-Aware E-Graphs</span></p>
+      <hr>
+      <p class="lead">
+        E-graphs store bare equalities: they do not know <em class="keyword">why</em> an equality holds,
+        <em class="keyword">when</em> it applies, or <em class="keyword">how</em> it relates to other facts, so reasoning
+        tools compensate with costly workarounds. 
+        <img class="inline-logo" src="assets/logo-type2.svg" alt="Smart E-Graphs"> push that 
+        <span class="keyword">semantic</span>
+        knowledge into the data structure itself, proving <span class="keyword">faster</span>.
+      </p>
+    </section>
 
     <h2 id="about">E-Graphs</h2>
     <p>
@@ -57,8 +59,8 @@
     </figure>
     <p>
       Other aspects of the reasoning, such as terms being
-      <span class="kw">different</span>, equalities holding <span class="kw">under
-      assumptions</span>, or facts being discovered in <span class="kw">separate
+      <span class="keyword">different</span>, equalities holding <span class="keyword">under
+      assumptions</span>, or facts being discovered in <span class="keyword">separate
       contexts</span>, are not part of the data structure itself.
       This semantic information is traditionally managed by the tools around the e-graph,
       for example by encoding it through equalities or by maintaining one e-graph per
@@ -94,27 +96,27 @@
     </p>
     <p>
       Representing difference, assumptions, and contexts directly in the data structure
-      removes these costs: facts can be <span class="kw-alt">shared</span> across proof
+      removes these costs: facts can be <span class="keyword-alt">shared</span> across proof
       branches rather than replicated, knowledge from independently explored contexts can
-      be <span class="kw-alt">composed</span>, and proof exploration can be organized
-      <span class="kw-alt">in parallel</span>. The extensions below develop this idea step
+      be <span class="keyword-alt">composed</span>, and proof exploration can be organized
+      <span class="keyword-alt">in parallel</span>. The extensions below develop this idea step
       by step, each with formal correctness guarantees and measurable performance gains.
     </p>
 
     <h2 id="extensions">Semantic Extensions</h2>
 
-    <article class="ext">
-      <div class="ext-body">
+    <article class="extension">
+      <div class="extension-body">
         <h3>
-          <span class="ext-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="5" y1="9.5" x2="19" y2="9.5"/><line x1="5" y1="14.5" x2="19" y2="14.5"/><line x1="15.5" y1="4.5" x2="8.5" y2="19.5"/></svg></span>
+          <span class="extension-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="5" y1="9.5" x2="19" y2="9.5"/><line x1="5" y1="14.5" x2="19" y2="14.5"/><line x1="15.5" y1="4.5" x2="8.5" y2="19.5"/></svg></span>
           Disequality Reasoning
         </h3>
         <p>E-graphs that natively know when two terms must differ. Refutation becomes a
         first-class operation instead of an encoding trick, with a simpler metatheory and
         better performance than the embeddings used in SMT solvers.
-        <a href="#pub-diseq">Dis/Equality Graphs, POPL 2025</a>.</p>
+        <a href="#publication-diseq">Dis/Equality Graphs, POPL 2025</a>.</p>
       </div>
-      <svg class="ext-img diagram" viewBox="0 0 120 70" aria-hidden="true">
+      <svg class="extension-img diagram" viewBox="0 0 120 70" aria-hidden="true">
         <rect class="eclass" x="6" y="22" width="30" height="22" rx="11"/>
         <rect class="eclass" x="84" y="22" width="30" height="22" rx="11"/>
         <circle class="enode" cx="21" cy="33" r="5"/>
@@ -127,18 +129,18 @@
       </svg>
     </article>
 
-    <article class="ext">
-      <div class="ext-body">
+    <article class="extension">
+      <div class="extension-body">
         <h3>
-          <span class="ext-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7.5 12 C12 12 12 5.5 16.5 5.5"/><path d="M7.5 12 C12 12 12 18.5 16.5 18.5"/><circle cx="5" cy="12" r="2.5" fill="currentColor" stroke="none"/><circle cx="19" cy="5.5" r="2.5" fill="currentColor" stroke="none"/><circle cx="19" cy="18.5" r="2.5" fill="currentColor" stroke="none"/></svg></span>
+          <span class="extension-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7.5 12 C12 12 12 5.5 16.5 5.5"/><path d="M7.5 12 C12 12 12 18.5 16.5 18.5"/><circle cx="5" cy="12" r="2.5" fill="currentColor" stroke="none"/><circle cx="19" cy="5.5" r="2.5" fill="currentColor" stroke="none"/><circle cx="19" cy="18.5" r="2.5" fill="currentColor" stroke="none"/></svg></span>
           Conditional Reasoning
         </h3>
         <p>Equalities rarely hold unconditionally. Versioned e-graphs encode a whole family
         of equivalence relations at once, one per set of assumptions, so proof branches share
         the facts they agree on instead of replicating them.
-        <a href="#pub-versioned">Versioned E-Graphs, PLDI 2026</a>.</p>
+        <a href="#publication-versioned">Versioned E-Graphs, PLDI 2026</a>.</p>
       </div>
-      <svg class="ext-img diagram" viewBox="0 0 120 70" aria-hidden="true">
+      <svg class="extension-img diagram" viewBox="0 0 120 70" aria-hidden="true">
         <path class="edge" d="M32 35 C50 35 54 16 86 16"/>
         <path class="edge" d="M32 35 C50 35 54 54 86 54"/>
         <g class="packet">
@@ -158,17 +160,17 @@
       </svg>
     </article>
 
-    <article class="ext">
-      <div class="ext-body">
+    <article class="extension">
+      <div class="extension-body">
         <h3>
-          <span class="ext-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4 h9 l-9 9 h9"/><path d="M4 14 h6 l-6 6 h6"/></svg></span>
+          <span class="extension-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4 h9 l-9 9 h9"/><path d="M4 14 h6 l-6 6 h6"/></svg></span>
           Lazy Reasoning
         </h3>
         <p>Equivalence relations form a lattice. Lazy meet and join operations compose the
         knowledge of independently explored contexts on demand, touching only the equalities
         a query actually needs. <strong>In progress</strong>.</p>
       </div>
-      <svg class="ext-img diagram" viewBox="0 0 120 70" aria-hidden="true">
+      <svg class="extension-img diagram" viewBox="0 0 120 70" aria-hidden="true">
         <g class="edge">
           <line x1="60" y1="12" x2="26" y2="35"/>
           <line x1="60" y1="12" x2="94" y2="35"/>
@@ -196,17 +198,17 @@
       </svg>
     </article>
 
-    <article class="ext">
-      <div class="ext-body">
+    <article class="extension">
+      <div class="extension-body">
         <h3>
-          <span class="ext-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6 h8 m0 0 l-3 -3 m3 3 l-3 3"/><path d="M3 12 h8 m0 0 l-3 -3 m3 3 l-3 3"/><path d="M3 18 h8 m0 0 l-3 -3 m3 3 l-3 3"/><line x1="17.5" y1="4" x2="17.5" y2="20"/></svg></span>
+          <span class="extension-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6 h8 m0 0 l-3 -3 m3 3 l-3 3"/><path d="M3 12 h8 m0 0 l-3 -3 m3 3 l-3 3"/><path d="M3 18 h8 m0 0 l-3 -3 m3 3 l-3 3"/><line x1="17.5" y1="4" x2="17.5" y2="20"/></svg></span>
           Parallel Reasoning
         </h3>
         <p>The lattice structure exposes which reasoning tasks are independent. Scheduling
         proof exploration as parallel tasks over a lattice of e-graphs turns semantic
         awareness into raw speed. <strong>In progress</strong>.</p>
       </div>
-      <svg class="ext-img diagram" viewBox="0 0 120 70" aria-hidden="true">
+      <svg class="extension-img diagram" viewBox="0 0 120 70" aria-hidden="true">
         <g class="vbox">
           <rect x="6" y="4" width="26" height="20" rx="7"/>
           <rect x="6" y="25" width="26" height="20" rx="7"/>
@@ -234,31 +236,7 @@
 
     <h2 id="publications">Publications</h2>
 
-    <!-- <article class="pub" id="pub-lattices">
-      <span class="badge submission">Under submission</span>
-      <h3>Where Forks Meet and Join: Lattices of Union-Finds</h3>
-      <p class="venue">Draft under double-blind review, 2026</p>
-      <p class="links">
-        <a href="publications/2026-lattices-of-union-finds.pdf">PDF</a>
-      </p>
-      <details>
-        <summary>Abstract</summary>
-        <p>Automated provers reason about equality under many different assumptions, which
-        induce a family of related equivalence relations over the same terms. Existing
-        extensions to union-finds, and e-graphs built on top, support different equivalence
-        relations over the same terms, but do not support composing the relations induced by
-        independently derived contexts without replaying work or duplicating relations.
-        Based on the observation that equivalence relations form a lattice, this paper
-        introduces two operations: combining relations by the equivalence closure of their
-        union (their meet), and extracting the equalities common across multiple relations by
-        intersection (their join). A lazy extension of versioned union-finds realizes both
-        operations alongside version forking, with proofs of correctness and complexity. The
-        cost of the operations scales as roughly n<sup>1.5</sup> on average against
-        n<sup>2</sup> for the eager variants, with at most 12% runtime overhead.</p>
-      </details>
-    </article> -->
-
-    <article class="pub" id="pub-versioned">
+    <article class="publication" id="publication-versioned">
       <span class="badge published">PLDI 2026</span>
       <h3>Versioned E-Graphs</h3>
       <p class="authors">Jahrim Gabriele Cesario, George Zakhour, Pascal Weisenburger, Guido Salvaneschi</p>
@@ -283,7 +261,7 @@
       </details>
     </article>
 
-    <article class="pub" id="pub-diseq">
+    <article class="publication" id="publication-diseq">
       <span class="badge published">POPL 2025</span>
       <h3>Dis/Equality Graphs</h3>
       <p class="authors">George Zakhour, Pascal Weisenburger, Jahrim Gabriele Cesario, Guido Salvaneschi</p>
@@ -307,15 +285,6 @@
         equality embedding.</p>
       </details>
     </article>
-
-    <!-- <h2 id="people">People</h2>
-    <ul class="people">
-      <li><a href="https://programming-group.com/members/cesario">Jahrim Gabriele Cesario</a> <span class="affil">&middot; University of St. Gallen</span></li>
-      <li><a href="https://programming-group.com/members/zakhour">George Zakhour</a> <span class="affil">&middot; University of St. Gallen</span></li>
-      <li><a href="https://programming-group.com/members/weisenburger">Pascal Weisenburger</a> <span class="affil">&middot; University of St. Gallen</span></li>
-      <li><a href="https://programming-group.com/members/salvaneschi">Guido Salvaneschi</a> <span class="affil">&middot; University of St. Gallen</span></li>
-    </ul> -->
-
   </div>
 </main>
 
@@ -323,5 +292,11 @@
   <a href="https://programming-group.com/">Programming Group</a> &middot; University of St. Gallen
 </footer>
 
+<script>
+  fetch("assets/logo-animated.svg").then(function (r) { return r.text(); }).then(function (svg) {
+    var slot = document.getElementById("hero-logo-slot");
+    if (slot) slot.outerHTML = svg;
+  });
+</script>
 </body>
 </html>

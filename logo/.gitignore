@@ -1,0 +1,67 @@
+# --- LaTeX build artifacts ---
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
+
+# Intermediate / engine files
+*.dvi
+*.xdv
+*-converted-to.*
+*.synctex
+*.synctex(busy)
+*.synctex.gz
+*.synctex.gz(busy)
+*.pdfsync
+
+# Bibliography
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+*-blx.bib
+
+# Index / glossary / nomenclature
+*.idx
+*.ilg
+*.ind
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*.nlg
+*.nlo
+*.nls
+
+# beamer / minted / listings / todonotes
+*.nav
+*.snm
+*.vrb
+_minted*
+*.pyg
+*.tdo
+
+# latexmk
+*.fdb_latexmk
+
+# Others
+*.bak
+*.sav
+*.spl
+*.dpth
+*.md5
+*.auxlock
+
+# --- Optional: uncomment to ignore the built PDF ---
+# *.pdf

@@ -6,7 +6,12 @@
       "Bash(python3 -m http.server 8769)",
       "Bash(curl -s -o /dev/null -w \"page -> %{http_code}\\\\n\" http://localhost:8769/)",
       "Bash(kill %1)",
-      "Bash(node -e ' *)"
+      "Bash(node -e ' *)",
+      "Bash(python3 /tmp/claude-1000/-workspace/753791dc-b383-4120-bfc0-75d5029902d1/scratchpad/mk_anim.py)",
+      "Bash(python3 -c \"import xml.dom.minidom as m; m.parse\\('assets/logo-type2-anim.svg'\\); print\\('XML OK'\\)\")",
+      "Bash(python3 /tmp/claude-1000/-workspace/753791dc-b383-4120-bfc0-75d5029902d1/scratchpad/mk_anim2.py)",
+      "Bash(awk '/class=\"lamp-word\"/{f=1} f{print} /<\\\\/g>/{if\\(f\\)c++} c>=1 && f && /<\\\\/g>/{exit}' index.html)",
+      "Bash(python3 *)"
     ]
   }
 }
