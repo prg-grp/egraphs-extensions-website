@@ -60,7 +60,7 @@ code {
   border-radius: 5px;
 }
 p { margin: 0 0 1rem; }
-.lead { font-size: 1.06rem; font-weight: 400; color: var(--muted); }
+.lead { font-size: 1.06rem; font-weight: 600; color: var(--fg); text-align: justify; }
 .inline-logo { height: 2em; width: auto; vertical-align: -0.37em; }
 .keyword, .keyword-alt {
   padding: 0.06em 0.5em;
@@ -195,7 +195,7 @@ header .wrap {
 .tagline {
   font-size: 1.6rem;
   font-weight: 700;
-  color: var(--fg);
+  color: var(--muted);
   text-align: center;
   margin: 0 auto;
   max-width: 34rem;
