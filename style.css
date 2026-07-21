@@ -160,13 +160,13 @@ header .wrap {
 .hero-logo .lamp-eclass { animation: lampEclass 0.28s 2.8s both; }
 .hero-logo .lamp-word use {
   opacity: 0;
-  animation: lampWord 0.45s ease-out both;
+  animation: lampWord 0.28s ease-out both;
 }
 .hero-logo .lamp-word use:nth-child(1) { animation-delay: 3.08s; }
-.hero-logo .lamp-word use:nth-child(2) { animation-delay: 3.2s; }
-.hero-logo .lamp-word use:nth-child(3) { animation-delay: 3.32s; }
-.hero-logo .lamp-word use:nth-child(4) { animation-delay: 3.44s; }
-.hero-logo .lamp-word use:nth-child(5) { animation-delay: 3.56s; }
+.hero-logo .lamp-word use:nth-child(2) { animation-delay: 3.15s; }
+.hero-logo .lamp-word use:nth-child(3) { animation-delay: 3.22s; }
+.hero-logo .lamp-word use:nth-child(4) { animation-delay: 3.29s; }
+.hero-logo .lamp-word use:nth-child(5) { animation-delay: 3.36s; }
 @keyframes lampBulb { from { opacity: 0; } to { opacity: 1; } }
 @keyframes lampFlicker {
   0%, 10% { opacity: 0; }
