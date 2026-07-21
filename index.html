@@ -25,7 +25,7 @@
     <section class="hero">
       <span id="hero-logo-slot"></span>
       <noscript><img class="hero-logo" src="assets/logo-type2.svg" alt="Smart E-Graphs"></noscript>
-      <p class="tagline"><em>Equality is Just The Beginning:</br>Semantic-Aware E-Graphs</em>
+      <p class="tagline">Equality is Just The Beginning:</br>Semantic-Aware E-Graphs
       <hr>
       <p class="lead">
         E-graphs store <em class="keyword">bare</em> equalities: they do not know <em class="keyword">why</em> an equality holds,
@@ -36,75 +36,9 @@
       </p>
     </section>
 
-    <h2 id="about">E-Graphs</h2>
-    <p>
-      E-graphs compactly represent large spaces of equivalent terms, and they sit at the
-      core of automated theorem provers, SMT solvers, and optimizing compilers. The
-      classical data structure is built around one kind of fact: unconditional equality
-      between terms. For example, the e-graph below contains the atoms <code>a</code> and
-      <code>b</code> and the applications <code>f(a)</code> and <code>f(b)</code>.
-      Rectangles are <em>e-nodes</em>, one per term; circles are <em>e-classes</em>, the
-      sets of e-nodes known to be equal; and each arrow connects an e-node to the e-class
-      of its argument. Initially every e-node sits in its own e-class (a). Asserting
-      <code>a = b</code> merges their e-classes (b), and by congruence the e-graph
-      discovers on its own that <code>f(a) = f(b)</code>, merging those e-classes as
-      well (c).
-    </p>
-    <figure class="fig-run fig-wide">
-      <img src="assets/egraph.png"
-           alt="Three states of an e-graph with atoms a and b and applications f(a) and
-                f(b): the initial state with four e-classes, the intermediate state where
-                a and b share an e-class, and the final state where f(a) and f(b) are
-                also merged">
-    </figure>
-    <p>
-      Other aspects of the reasoning, such as terms being
-      <span class="keyword">different</span>, equalities holding <span class="keyword">under
-      assumptions</span>, or facts being discovered in <span class="keyword">separate
-      contexts</span>, are not part of the data structure itself.
-      This semantic information is traditionally managed by the tools around the e-graph,
-      for example by encoding it through equalities or by maintaining one e-graph per
-      context.
-    </p>
-  
-    <h2 id="motivation">Challenges</h2>
-    <p>
-      Consider a verifier analyzing the following function, which adds the distances
-      <code>f(dx)</code> and <code>f(dy)</code> of two differences, doubling by a bit
-      shift when the operands are known to be equal. Each conditional splits the
-      reasoning into branches: the first branch assumes <code>dx = dy</code>, the others
-      assume <code>dx &ne; dy</code> together with <code>da = db</code> or
-      <code>da &ne; db</code>. The nested scopes form a tree of contexts, each carrying
-      its own set of facts.
-    </p>
-    <figure class="fig-run">
-      <img src="assets/example.svg"
-           alt="The dist_diffs function with nested branch scopes, and the tree of
-                contexts with assumptions dx = dy, dx ≠ dy, da = db, and da ≠ db,
-                each aligned with its scope in the code">
-      <figcaption>Each branch introduces its own assumptions, forming a tree of contexts
-      aligned with the scopes of the code.</figcaption>
-    </figure>
-    <p>
-      A classical e-graph has no place for any of this. The disequality
-      <code>dx &ne; dy</code> cannot be stated, so it must be tracked outside the data
-      structure. Each branch needs its own equivalence relation, so tools maintain one
-      full e-graph per branch, even though the branches agree on most of what they know.
-      And once the branches have been explored, there is no operation to combine what they
-      learned. As programs and proofs branch further, the duplicated and replayed work
-      compounds.
-    </p>
-    <p>
-      Representing difference, assumptions, and contexts directly in the data structure
-      removes these costs: facts can be <span class="keyword-alt">shared</span> across proof
-      branches rather than replicated, knowledge from independently explored contexts can
-      be <span class="keyword-alt">composed</span>, and proof exploration can be organized
-      <span class="keyword-alt">in parallel</span>. The extensions below develop this idea step
-      by step, each with formal correctness guarantees and measurable performance gains.
-    </p>
-
     <h2 id="extensions">Semantic Extensions</h2>
 
+    <div class="extensions">
     <article class="extension">
       <div class="extension-body">
         <h3>
@@ -113,8 +47,7 @@
         </h3>
         <p>E-graphs that natively know when two terms must differ. Refutation becomes a
         first-class operation instead of an encoding trick, with a simpler metatheory and
-        better performance than the embeddings used in SMT solvers.
-        <a href="#publication-diseq">Dis/Equality Graphs, POPL 2025</a>.</p>
+        better performance than the embeddings used in SMT solvers.</p>
       </div>
       <svg class="extension-img diagram" viewBox="0 0 120 70" aria-hidden="true">
         <rect class="eclass" x="6" y="22" width="30" height="22" rx="11"/>
@@ -127,6 +60,10 @@
           <line x1="66" y1="21" x2="54" y2="45"/>
         </g>
       </svg>
+      <div class="ext-actions">
+        <a class="ext-btn" href="#publication-diseq">Read the paper &rarr;</a>
+        <a class="ext-btn ext-btn-artifact" href="https://zenodo.org/records/13938878" target="_blank" rel="noopener"><svg class="artifact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8v8a2 2 0 0 1-1 1.73l-7 4a2 2 0 0 1-2 0l-7-4A2 2 0 0 1 3 16V8a2 2 0 0 1 1-1.73l7-4a2 2 0 0 1 2 0l7 4A2 2 0 0 1 21 8z"/><path d="M3.3 7 12 12l8.7-5"/><path d="M12 22V12"/></svg> Artifact</a>
+      </div>
     </article>
 
     <article class="extension">
@@ -136,9 +73,8 @@
           Conditional Reasoning
         </h3>
         <p>Equalities rarely hold unconditionally. Versioned e-graphs encode a whole family
-        of equivalence relations at once, one per set of assumptions, so proof branches share
-        the facts they agree on instead of replicating them.
-        <a href="#publication-versioned">Versioned E-Graphs, PLDI 2026</a>.</p>
+        of equivalence relations at once, one per set of assumptions, so proof branches
+        can avoid replicating facts they agree on.</p>
       </div>
       <svg class="extension-img diagram" viewBox="0 0 120 70" aria-hidden="true">
         <path class="edge" d="M32 35 C50 35 54 16 86 16"/>
@@ -158,6 +94,10 @@
           <text x="99" y="58">E&#8322;</text>
         </g>
       </svg>
+      <div class="ext-actions">
+        <a class="ext-btn" href="#publication-versioned">Read the paper &rarr;</a>
+        <a class="ext-btn ext-btn-artifact" href="https://zenodo.org/records/18769553" target="_blank" rel="noopener"><svg class="artifact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8v8a2 2 0 0 1-1 1.73l-7 4a2 2 0 0 1-2 0l-7-4A2 2 0 0 1 3 16V8a2 2 0 0 1 1-1.73l7-4a2 2 0 0 1 2 0l7 4A2 2 0 0 1 21 8z"/><path d="M3.3 7 12 12l8.7-5"/><path d="M12 22V12"/></svg> Artifact</a>
+      </div>
     </article>
 
     <article class="extension">
@@ -168,7 +108,7 @@
         </h3>
         <p>Equivalence relations form a lattice. Lazy meet and join operations compose the
         knowledge of independently explored contexts on demand, touching only the equalities
-        a query actually needs. <strong>In progress</strong>.</p>
+        a query actually needs.</p>
       </div>
       <svg class="extension-img diagram" viewBox="0 0 120 70" aria-hidden="true">
         <g class="edge">
@@ -196,6 +136,9 @@
           <text x="60" y="62">E&#8321;&#8744;E&#8322;</text>
         </g>
       </svg>
+      <div class="ext-actions">
+        <span class="ext-btn is-disabled" aria-disabled="true">In progress</span>
+      </div>
     </article>
 
     <article class="extension">
@@ -206,7 +149,7 @@
         </h3>
         <p>The lattice structure exposes which reasoning tasks are independent. Scheduling
         proof exploration as parallel tasks over a lattice of e-graphs turns semantic
-        awareness into raw speed. <strong>In progress</strong>.</p>
+        awareness into raw speed.</p>
       </div>
       <svg class="extension-img diagram" viewBox="0 0 120 70" aria-hidden="true">
         <g class="vbox">
@@ -232,7 +175,15 @@
           <path d="M38 56 h42" pathLength="100" style="animation-delay: -1.6s"/>
         </g>
       </svg>
+      <div class="ext-actions">
+        <span class="ext-btn is-disabled" aria-disabled="true">In progress</span>
+      </div>
     </article>
+    </div>
+
+    <p class="readmore-wrap">
+      <a class="readmore-btn" href="background.html">Read more &rarr;</a>
+    </p>
 
     <h2 id="publications">Publications</h2>
 
@@ -285,6 +236,17 @@
         equality embedding.</p>
       </details>
     </article>
+
+    <h2 id="credits">Credits</h2>
+    <p><img class="inline-logo" src="assets/logo-type2.svg" alt="Smart E-Graphs"> is developed by the Programming Group at the University of St. Gallen.</p>
+    <div class="credit-logos">
+      <a class="credit-logo" href="https://programming-group.com/" target="_blank" rel="noopener">
+        <img src="assets/logo-programming-group.svg" alt="Programming Group">
+      </a>
+      <a class="credit-logo" href="https://www.unisg.ch/en/" target="_blank" rel="noopener">
+        <img src="assets/logo-unisg.svg" alt="University of St. Gallen">
+      </a>
+    </div>
   </div>
 </main>
 

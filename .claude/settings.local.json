@@ -11,7 +11,19 @@
       "Bash(python3 -c \"import xml.dom.minidom as m; m.parse\\('assets/logo-type2-anim.svg'\\); print\\('XML OK'\\)\")",
       "Bash(python3 /tmp/claude-1000/-workspace/753791dc-b383-4120-bfc0-75d5029902d1/scratchpad/mk_anim2.py)",
       "Bash(awk '/class=\"lamp-word\"/{f=1} f{print} /<\\\\/g>/{if\\(f\\)c++} c>=1 && f && /<\\\\/g>/{exit}' index.html)",
-      "Bash(python3 *)"
+      "Bash(python3 *)",
+      "WebFetch(domain:about.zenodo.org)",
+      "Bash(curl -sSL -o logo-zenodo.svg \"https://zenodo.org/static/img/logos/zenodo-gradient-round.svg\")",
+      "WebFetch(domain:zenodo.org)",
+      "Bash(ls -la logo-zenodo.svg)",
+      "Bash(rm -f logo-zenodo.svg)",
+      "Bash(curl -sL -o assets/logo-programming-group.svg \"https://programming-group.com/assets/img/pg-logo.svg\")",
+      "WebFetch(domain:commons.wikimedia.org)",
+      "Bash(curl -sL -o assets/logo-unisg.svg \"https://commons.wikimedia.org/wiki/Special:FilePath/HSG_Logo_EN_RGB.svg\")",
+      "Bash(curl -sSL -o assets/logo-unisg.svg \"https://commons.wikimedia.org/wiki/Special:FilePath/HSG_Logo_EN_RGB.svg\")",
+      "Bash(echo \"exit=$?\")",
+      "WebFetch(domain:www.unisg.ch)",
+      "Bash(grep -oi 'fill:[^;\\\\\"]*\\\\|fill=\\\\\"[^\\\\\"]*\\\\\"\\\\|#[0-9a-fA-F]\\\\{3,6\\\\}' assets/logo-programming-group.svg)"
     ]
   }
 }
