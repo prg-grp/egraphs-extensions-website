@@ -149,6 +149,12 @@ header .wrap {
   max-width: 100%;
   margin: 0 auto 1.25rem;
 }
+/* In dark mode the wordmark and lamp outline are drawn in black; recolor to the
+   foreground so they stay legible. The injected hero SVG is inline, so CSS reaches it. */
+@media (prefers-color-scheme: dark) {
+  .hero-logo [fill="rgb(0%, 0%, 0%)"] { fill: var(--fg); }
+  .hero-logo [stroke="rgb(0%, 0%, 0%)"] { stroke: var(--fg); }
+}
 
 /* Lamp powers on bottom-to-top; then "Smart" fades in left-to-right. */
 .hero-logo .lamp-bulb { animation: lampBulb 0.6s ease-out both; }
