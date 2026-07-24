@@ -3,9 +3,8 @@
   --bg: #fdfdfc;
   --fg: #1c1e21;
   --muted: #5c6470;
-  --accent: #7c3aed;
-  --accent-soft: #f0e9fd;
-  --eclass: #d97706;
+  --accent: var(--logo-wood);
+  --accent-soft: #ebe6e0;
   --card: #ffffff;
   --border: #e3e5e8;
   --badge-pub: #0d7a4f;
@@ -13,21 +12,32 @@
   --badge-sub: #92600a;
   --badge-sub-bg: #fdf1da;
   --logo-scale: 8;
+  /* WISE wordmark tones (see logo-hero.svg): "W I" = wood, "S E" = woodlight */
+  --logo-wood: #3d2c18;
+  --logo-woodlight: #8f7e6a;
+  /* Soft pill/hover tint for the secondary (woodlight) highlight */
+  --logo-woodlight-soft: #efece8;
+  /* Logo e-graph face colors, used for the diagram e-classes and e-nodes */
+  --logo-eclass: #cfa86b;
+  --logo-enode: #f0a01e;
 }
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #16181d;
     --fg: #e8eaed;
     --muted: #9aa3af;
-    --accent: #b79bf5;
-    --accent-soft: #2a2340;
-    --eclass: #e8b45a;
+    --accent-soft: #2b2a27;
     --card: #1e2127;
     --border: #31353c;
     --badge-pub: #6fd8a8;
     --badge-pub-bg: #17362a;
     --badge-sub: #ecc06a;
     --badge-sub-bg: #3a2e14;
+    /* wood recolors to gray in dark mode, matching the logo; woodlight is unchanged */
+    --logo-wood: #868c93;
+    --logo-woodlight-soft: #2f2c28;
+    --logo-eclass: #b3b8be;
+    --logo-enode: #f7bd3e;
   }
 }
 
@@ -61,7 +71,7 @@ code {
 }
 p { margin: 0 0 1rem; }
 .lead { font-size: 1.06rem; font-weight: 600; color: var(--fg); text-align: justify; }
-.inline-logo { height: 2.25em; width: auto; vertical-align: -0.45em; }
+.inline-logo { height: 2.25em; width: auto; vertical-align: -0.17em; }
 .keyword, .keyword-alt {
   padding: 0.06em 0.5em;
   border-radius: 999px;
@@ -71,8 +81,8 @@ p { margin: 0 0 1rem; }
   background: var(--accent-soft);
 }
 .keyword-alt {
-  color: var(--badge-sub);
-  background: var(--badge-sub-bg);
+  color: var(--logo-woodlight);
+  background: var(--logo-woodlight-soft);
 }
 
 /* Work-in-progress banner */
@@ -117,34 +127,17 @@ header .wrap {
   width: auto;
 }
 
-/* Hero card */
+/* Hero card: gradient border in the WISE wordmark tones, running left-to-right
+   from wood to woodlight around the whole card. The padding-box layer paints the
+   card fill; the border-box gradient shows through the transparent border. */
 .hero {
-  position: relative;
-  background: var(--card);
-  border: 1px solid var(--border);
+  background:
+    linear-gradient(var(--card), var(--card)) padding-box,
+    linear-gradient(to right, var(--logo-wood) 46%, var(--logo-woodlight) 54%) border-box;
+  border: 3px solid transparent;
   border-radius: 12px;
   padding: 2.25rem 1.75rem 2rem;
   margin: 2rem 0 2.5rem;
-}
-.hero > * { position: relative; z-index: 1; }
-/* Amber halo flickers on outside the perimeter once the lamp lights up (~3s),
-   using the same flicker as the e-class and text but capped at its subtle level. */
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  box-shadow: 0 0 2.5rem 0.1rem var(--badge-sub-bg);
-  opacity: 0;
-  animation: heroGlow 0.28s 2.8s both;
-}
-@keyframes heroGlow {
-  0% { opacity: 0; }
-  30% { opacity: 0.55; }
-  60% { opacity: 0; }
-  100% { opacity: 0.55; }
 }
 /* #hero-logo-slot reserves the logo's box so injecting the SVG causes no layout shift */
 #hero-logo-slot,
@@ -155,49 +148,6 @@ header .wrap {
   max-width: 100%;
   margin: 0 auto 1.25rem;
 }
-/* In dark mode the wordmark and lamp outline are drawn in black; recolor to the
-   foreground so they stay legible. The injected hero SVG is inline, so CSS reaches it. */
-@media (prefers-color-scheme: dark) {
-  .hero-logo [fill="rgb(0%, 0%, 0%)"] { fill: var(--fg); }
-  .hero-logo [stroke="rgb(0%, 0%, 0%)"] { stroke: var(--fg); }
-}
-
-/* Lamp powers on bottom-to-top; then "Smart" fades in left-to-right. */
-.hero-logo .lamp-bulb { animation: lampBulb 0.6s ease-out both; }
-.hero-logo .lamp-edge,
-.hero-logo .lamp-node {
-  animation: lampFlicker 1.3s both;
-  animation-delay: var(--d, 0s);
-}
-.hero-logo .lamp-eclass { animation: lampEclass 0.28s 2.8s both; }
-.hero-logo .lamp-word use {
-  opacity: 0;
-  animation: lampEclass 0.28s 2.8s both;
-}
-@keyframes lampBulb { from { opacity: 0; } to { opacity: 1; } }
-@keyframes lampFlicker {
-  0%, 10% { opacity: 0; }
-  18% { opacity: 1; }
-  28% { opacity: 0.12; }
-  40% { opacity: 1; }
-  55% { opacity: 0.4; }
-  70% { opacity: 1; }
-  100% { opacity: 1; }
-}
-@keyframes lampEclass {
-  0% { opacity: 0; }
-  30% { opacity: 1; }
-  60% { opacity: 0; }
-  100% { opacity: 1; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero::after { animation: none; opacity: 0.55; }
-  .hero-logo .lamp-bulb,
-  .hero-logo .lamp-edge,
-  .hero-logo .lamp-node,
-  .hero-logo .lamp-eclass,
-  .hero-logo .lamp-word use { animation: none; opacity: 1; }
-}
 .tagline {
   font-size: 1.6rem;
   font-weight: 700;
@@ -206,6 +156,9 @@ header .wrap {
   margin: 0 auto;
   max-width: 34rem;
 }
+/* Slogan colored to match the WISE logo's two tones: W/I words in wood, S/E words in woodlight */
+.tagline .init-wood { color: var(--logo-wood); }
+.tagline .init-woodlight { color: var(--logo-woodlight); }
 .hero hr {
   border: none;
   border-top: 1px solid var(--border);
@@ -238,7 +191,7 @@ header .wrap {
 }
 .diagram .packet path {
   fill: none;
-  stroke: var(--eclass);
+  stroke: var(--accent);
   stroke-width: 2.5;
   stroke-linecap: round;
   stroke-dasharray: 12 88;
@@ -259,16 +212,16 @@ header .wrap {
 }
 .diagram .eclass {
   fill: none;
-  stroke: var(--eclass);
+  stroke: var(--logo-woodlight);
   stroke-width: 2.5;
   stroke-dasharray: 5 4;
   stroke-linecap: round;
 }
-.diagram .enode { fill: var(--eclass); }
+.diagram .enode { fill: var(--accent); }
 .diagram .edge { stroke: var(--muted); stroke-width: 2.5; fill: none; }
 .diagram .vbox {
-  fill: var(--badge-sub-bg);
-  stroke: var(--badge-sub);
+  fill: var(--logo-woodlight-soft);
+  stroke: var(--logo-woodlight);
   stroke-width: 2;
 }
 .diagram .vlabel {

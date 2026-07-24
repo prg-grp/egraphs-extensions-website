@@ -1,27 +1,58 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- Colors live here: edit the values below; the dark block applies when the
-       viewer uses a dark color scheme. This file is used both by the favicon
-       and the header logo in index.html. -->
+  <!-- WISE owl mark, v22 (from v18): light mode warm (unchanged); dark mode
+       recolored to a gray scheme (gray feathers/branch, gold eyes + green leaf
+       kept as accents). Colors live here; the dark block applies under a dark
+       color scheme. -->
   <style>
-    .bulb { fill: none; stroke: #000000; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-    .edge { stroke: #8a919c; stroke-width: 1.5; }
-    .eclass { fill: none; stroke: #d97706; stroke-width: 2; stroke-dasharray: 4 3; stroke-linecap: round; }
-    .enode { fill: #d97706; }
+    .owl   { fill: none; stroke: #5e4326; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .detail{ fill: none; stroke: #5e4326; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .foot  { fill: #5e4326; }
+    .branch{ fill: none; stroke: #3d2c18; stroke-width: 3.4; stroke-linecap: round; stroke-linejoin: round; }
+    .twig  { fill: none; stroke: #3d2c18; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .leaf  { fill: #6f7d3f; }
+    .edge  { stroke: #9c7b52; stroke-width: 1.5; }
+    .eclass{ fill: none; stroke: #cfa86b; stroke-width: 2; stroke-dasharray: 4 3; stroke-linecap: round; }
+    .enode { fill: #f0a01e; }
     @media (prefers-color-scheme: dark) {
-      .bulb { stroke: #e8eaed; }
-      .edge { stroke: #9aa3af; }
-      .eclass { stroke: #e8b45a; }
-      .enode { fill: #e8b45a; }
+      .owl   { stroke: #dadde1; }
+      .detail{ stroke: #dadde1; }
+      .foot  { fill: #dadde1; }
+      .branch{ stroke: #868c93; }
+      .twig  { stroke: #868c93; }
+      .leaf  { fill: #9fae57; }
+      .edge  { stroke: #969ca3; }
+      .eclass{ stroke: #b3b8be; }
+      .enode { fill: #f7bd3e; }
     }
   </style>
-  <path class="bulb" d="M23 36 A15 15 0 1 1 41 36 C38.5 38.5 38 40.5 38 43.5 L38 45 A2 2 0 0 1 36 47 L28 47 A2 2 0 0 1 26 45 L26 43.5 C26 40.5 25.5 38.5 23 36 Z"/>
-  <line class="bulb" x1="27.5" y1="50.5" x2="36.5" y2="50.5"/>
-  <line class="bulb" x1="29.5" y1="54" x2="34.5" y2="54"/>
-  <line class="edge" x1="26.5" y1="25" x2="32" y2="37"/>
-  <line class="edge" x1="37.5" y1="25" x2="32" y2="37"/>
-  <!-- <line class="edge" x1="32" y1="37" x2="32" y2="44.5"/> -->
-  <rect class="eclass" x="20.5" y="19.5" width="23" height="11" rx="5.5"/>
-  <circle class="enode" cx="26.5" cy="25" r="3.2"/>
-  <circle class="enode" cx="37.5" cy="25" r="3.2"/>
-  <circle class="enode" cx="32" cy="37" r="3.2"/>
+  <!-- owl body -->
+  <path class="owl" d="M22 9 C22.6 11.5 23.8 14.5 25 17 C28 15.2 30 14.8 32 15 C34 14.8 36 15.2 39 17 C40.2 14.5 41.4 11.5 42 9 C42.6 11.5 45 15 47 19 C49.5 24 50.2 30 49.5 36 C48 46 41 53 32 53 C23 53 16 46 14.5 36 C13.8 30 14 24 17 19 C19 15 21.4 11.5 22 9 Z"/>
+  <!-- 3-feather tail, curved and splayed (center longest) -->
+  <path class="detail" d="M28.2 53 C27.6 54.6 27.4 56 28 57.2 C28.9 56 29.6 54.6 30 53"/>
+  <path class="detail" d="M30.9 53 C30.5 55 30.8 57.2 32 58.3 C33.2 57.2 33.5 55 33.1 53"/>
+  <path class="detail" d="M35.8 53 C36.4 54.6 36.6 56 36 57.2 C35.1 56 34.4 54.6 34 53"/>
+  <!-- folded wings -->
+  <path class="detail" d="M19 37 C23 41 25 46 26 51.5"/>
+  <path class="detail" d="M45 37 C41 41 39 46 38 51.5"/>
+  <!-- e-graph face (v8 uniform 0.85 scale), smaller beak moved up -->
+  <g transform="translate(32,28) scale(0.85) translate(-32,-28)">
+    <line class="edge" x1="25" y1="28" x2="32" y2="40"/>
+    <line class="edge" x1="39" y1="28" x2="32" y2="40"/>
+    <rect class="eclass" x="17.5" y="21" width="29" height="14" rx="7"/>
+    <circle class="enode" cx="25" cy="28" r="3.4"/>
+    <circle class="enode" cx="39" cy="28" r="3.4"/>
+    <circle class="enode" cx="32" cy="40" r="2.6"/>
+  </g>
+  <!-- perch branch (in front): two segments + twig + leaf -->
+  <path class="branch" d="M14 47.5 L56 47.1"/>
+  <path class="branch" d="M38.5 47.3 L56 48"/>
+  <path class="twig" d="M49 51 Q50 49 51.5 47.5"/>
+  <path class="leaf" d="M51.5 47.5 Q52.3 42.8 56.8 42.8 Q56 47.5 51.5 47.5 Z"/>
+  <!-- blobby feet, up inside the body -->
+  <circle class="foot" cx="27.6" cy="46.0" r="1.5"/>
+  <circle class="foot" cx="29.0" cy="46.4" r="1.5"/>
+  <circle class="foot" cx="30.4" cy="46.0" r="1.5"/>
+  <circle class="foot" cx="33.6" cy="46.0" r="1.5"/>
+  <circle class="foot" cx="35.0" cy="46.4" r="1.5"/>
+  <circle class="foot" cx="36.4" cy="46.0" r="1.5"/>
 </svg>
