@@ -1,0 +1,24 @@
+\documentclass[border=6pt]{standalone}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage[T1]{fontenc}
+\usepackage{libertine}
+\newcommand{\logofont}{\sffamily}
+
+\definecolor{egorange}{HTML}{D97706}
+\definecolor{darkmodetext}{HTML}{E8EAED}
+\definecolor{wood}{HTML}{3d2c18}
+\definecolor{woodlight}{HTML}{8f7e6a}
+
+\begin{document}
+\begin{tikzpicture}
+  \newcommand{\xwise}{\hspace{0.25em}}
+  \node[anchor=base west, inner sep=0, text=wood] (eg) at (-0.1,0)
+        {\logofont\fontsize{46}{46}\selectfont W\xwise I\xwise \textcolor{woodlight}{S\xwise E}};
+%   \node[anchor=base west, inner sep=0] (eg) at (-0.1,-1.5)
+%         {\logofont\fontsize{46}{46}\selectfont Graphs};
+  \node[anchor=east, inner sep=0] (lamp) at (4.45,1.5)
+        {\includegraphics[trim=9 3 4 5, clip, height=1.5cm]{base.pdf}};
+\end{tikzpicture}
+\end{document}
