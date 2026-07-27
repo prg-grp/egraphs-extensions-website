@@ -231,7 +231,7 @@ header .wrap {
 
 /* Diagrams (SVG illustrations and animations) */
 @keyframes march {
-  to { stroke-dashoffset: -18; }
+  to { stroke-dashoffset: -15.5; }
 }
 @keyframes flow {
   to { stroke-dashoffset: -100; }
@@ -262,6 +262,7 @@ header .wrap {
   stroke: var(--eclass);
   stroke-width: 2.5;
   stroke-dasharray: 5 4;
+  stroke-dashoffset: 2.5;
   stroke-linecap: round;
 }
 .diagram .enode { fill: var(--eclass); }
@@ -312,7 +313,7 @@ header .wrap {
 }
 .extension-icon svg { width: 1.2rem; height: 1.2rem; }
 .extension p { margin: 0; color: var(--muted); font-size: 0.95rem; text-align: justify; }
-.extension-img { width: 100%; max-width: 200px; height: auto; align-self: center; }
+.extension-img { width: 100%; max-width: 270px; height: auto; align-self: center; }
 .ext-actions {
   display: flex;
   flex-wrap: wrap;
