@@ -3,34 +3,34 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WISE &mdash; Semantic-Aware E-Graphs</title>
-<meta name="description" content="WISE: equality is just the beginning. E-graphs that understand disequality, assumptions, and branching proofs, for provers that prove more, faster.">
+<title>Smart E-Graphs</title>
+<meta name="description" content="Smart e-graphs: equality is just the beginning. E-graphs that understand disequality, assumptions, and branching proofs, for provers that prove more, faster.">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="WISE">
+<meta property="og:site_name" content="Smart E-Graphs">
 <meta property="og:url" content="https://prg-grp.github.io/egraphs-extensions-website/">
-<meta property="og:title" content="WISE &mdash; Semantic-Aware E-Graphs">
-<meta property="og:description" content="WISE: equality is just the beginning. E-graphs that understand disequality, assumptions, and branching proofs, for provers that prove more, faster.">
-<meta property="og:image" content="https://prg-grp.github.io/egraphs-extensions-website/assets/logo-wise.png">
+<meta property="og:title" content="Smart E-Graphs">
+<meta property="og:description" content="Smart e-graphs: equality is just the beginning. E-graphs that understand disequality, assumptions, and branching proofs, for provers that prove more, faster.">
+<meta property="og:image" content="https://prg-grp.github.io/egraphs-extensions-website/assets/logo-type2.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="WISE">
+<meta property="og:image:alt" content="Smart E-Graphs">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="WISE &mdash; Semantic-Aware E-Graphs">
-<meta name="twitter:description" content="WISE: equality is just the beginning. E-graphs that understand disequality, assumptions, and branching proofs, for provers that prove more, faster.">
-<meta name="twitter:image" content="https://prg-grp.github.io/egraphs-extensions-website/assets/logo-wise.png">
-<link rel="preload" href="assets/logo-hero.svg" as="fetch" type="image/svg+xml">
+<meta name="twitter:title" content="Smart E-Graphs">
+<meta name="twitter:description" content="Smart e-graphs: equality is just the beginning. E-graphs that understand disequality, assumptions, and branching proofs, for provers that prove more, faster.">
+<meta name="twitter:image" content="https://prg-grp.github.io/egraphs-extensions-website/assets/logo-type2.png">
+<link rel="preload" href="assets/logo-animated.svg" as="fetch" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
 <link rel="icon" type="image/svg+xml" href="assets/logo-base.svg">
 </head>
 <body>
 
-<div class="wip" role="note">Work in progress</div>
+<!-- <div class="wip" role="note">Work in progress</div> -->
 
 <header>
   <div class="wrap">
     <picture>
-      <source srcset="assets/logo-wise-dark.svg" media="(prefers-color-scheme: dark)">
-      <img class="topbar-logo" src="assets/logo-wise.svg" alt="WISE">
+      <source srcset="assets/logo-type2-dark.svg" media="(prefers-color-scheme: dark)">
+      <img class="topbar-logo" src="assets/logo-type2.svg" alt="Smart E-Graphs">
     </picture>
   </div>
 </header>
@@ -40,14 +40,15 @@
 
     <section class="hero">
       <span id="hero-logo-slot"></span>
-      <noscript><picture><source srcset="assets/logo-wise-dark.svg" media="(prefers-color-scheme: dark)"><img class="hero-logo" src="assets/logo-wise.svg" alt="WISE"></picture></noscript>
-      <p class="tagline"><span class="init-wood">WISE Is</span> <span class="init-woodlight">Semantic-aware E-graphs</span><br><span class="init-wood">Equality Is</span> <span class="init-woodlight">Just The Beginning</span></p>
+      <noscript><picture><source srcset="assets/logo-type2-dark.svg" media="(prefers-color-scheme: dark)"><img class="hero-logo" src="assets/logo-type2.svg" alt="Smart E-Graphs"></picture></noscript>
+      <p class="tagline">Equality is Just The Beginning:</br>Semantic-Aware E-Graphs
       <hr>
       <p class="lead">
-        E-graphs store bare equalities: they do not know why an equality holds,
-        when it applies, or how it relates to other facts, so tools compensate
-        with costly workarounds. 
-        We push that semantic knowledge into the data structure itself, proving faster.
+        E-graphs store <em class="keyword">bare</em> equalities: they do not know <em class="keyword">why</em> an equality holds,
+        <em class="keyword">when</em> it applies, or <em class="keyword">how</em> it relates to other facts, so
+        tools compensate with costly workarounds. 
+        We push that 
+        <span class="keyword">semantic knowledge</span> into the data structure itself, proving <span class="keyword">faster</span>.
       </p>
     </section>
 
@@ -64,16 +65,17 @@
         first-class operation instead of an encoding trick, with a simpler metatheory and
         better performance than the embeddings used in SMT solvers.</p>
       </div>
-      <svg class="extension-img diagram" viewBox="0 0 120 70" aria-hidden="true">
-        <rect class="eclass" x="6" y="22" width="30" height="22" rx="11"/>
-        <rect class="eclass" x="84" y="22" width="30" height="22" rx="11"/>
-        <circle class="enode" cx="21" cy="33" r="5"/>
-        <circle class="enode" cx="99" cy="33" r="5"/>
-        <g class="fg">
-          <line x1="48" y1="28" x2="72" y2="28"/>
-          <line x1="48" y1="38" x2="72" y2="38"/>
-          <line x1="66" y1="21" x2="54" y2="45"/>
-        </g>
+      <svg class="extension-img diagram" viewBox="-21 0 162 70" aria-hidden="true">
+        <path class="eclass" d="M21 10 H25 A11 11 0 0 1 36 21 V49 A11 11 0 0 1 25 60 H17 A11 11 0 0 1 6 49 V21 A11 11 0 0 1 17 10 Z" pathLength="144"/>
+        <path class="eclass" d="M99 10 H103 A11 11 0 0 1 114 21 A11 11 0 0 1 103 32 H95 A11 11 0 0 1 84 21 A11 11 0 0 1 95 10 Z" pathLength="81"/>
+        <path class="eclass" d="M99 38 H103 A11 11 0 0 1 114 49 A11 11 0 0 1 103 60 H95 A11 11 0 0 1 84 49 A11 11 0 0 1 95 38 Z" pathLength="81"/>
+        <circle class="enode" cx="21" cy="21" r="5"/>
+        <circle class="enode" cx="21" cy="49" r="5"/>
+        <circle class="enode" cx="99" cy="21" r="5"/>
+        <circle class="enode" cx="99" cy="49" r="5"/>
+        <line class="edge" x1="39" y1="21" x2="51" y2="21" stroke-dasharray="4 4"/>
+        <line class="edge" x1="69" y1="21" x2="84" y2="21" stroke-dasharray="4 4"/>
+        <text class="vlabel" x="60" y="25.5" text-anchor="middle" style="font-size: 15px">&#8800;</text>
       </svg>
       <div class="ext-actions">
         <a class="ext-btn" href="#publication-diseq">Read the paper &rarr;</a>
@@ -91,7 +93,7 @@
         of equivalence relations at once, one per set of assumptions, so proof branches
         can avoid replicating facts they agree on.</p>
       </div>
-      <svg class="extension-img diagram" viewBox="0 0 120 70" aria-hidden="true">
+      <svg class="extension-img diagram" viewBox="-21 0 162 70" aria-hidden="true">
         <path class="edge" d="M32 35 C50 35 54 16 86 16"/>
         <path class="edge" d="M32 35 C50 35 54 54 86 54"/>
         <g class="packet">
@@ -107,6 +109,8 @@
           <text x="21" y="39">E&#8320;</text>
           <text x="99" y="20">E&#8321;</text>
           <text x="99" y="58">E&#8322;</text>
+          <text x="60" y="13" style="font-size: 9px">a = b</text>
+          <text x="60" y="64" style="font-size: 9px">a &#8800; b</text>
         </g>
       </svg>
       <div class="ext-actions">
@@ -125,7 +129,7 @@
         knowledge of independently explored contexts on demand, touching only the equalities
         a query actually needs.</p>
       </div>
-      <svg class="extension-img diagram" viewBox="0 0 120 70" aria-hidden="true">
+      <svg class="extension-img diagram" viewBox="-21 0 162 70" aria-hidden="true">
         <g class="edge">
           <line x1="60" y1="12" x2="26" y2="35"/>
           <line x1="60" y1="12" x2="94" y2="35"/>
@@ -139,16 +143,20 @@
           <path d="M94 35 L60 58" pathLength="100" style="animation-delay: -1.2s"/>
         </g>
         <g class="vbox">
-          <rect x="38" y="2" width="44" height="20" rx="7"/>
+          <rect x="34" y="2" width="52" height="20" rx="7"/>
           <rect x="13" y="25" width="26" height="20" rx="7"/>
           <rect x="81" y="25" width="26" height="20" rx="7"/>
-          <rect x="38" y="48" width="44" height="20" rx="7"/>
+          <rect x="34" y="48" width="52" height="20" rx="7"/>
         </g>
         <g class="vlabel" text-anchor="middle">
-          <text x="60" y="16">E&#8321;&#8743;E&#8322;</text>
+          <text x="60" y="16">E&#8321;<tspan dx="2">&#8743;</tspan><tspan dx="2">E&#8322;</tspan></text>
           <text x="26" y="39">E&#8321;</text>
           <text x="94" y="39">E&#8322;</text>
-          <text x="60" y="62">E&#8321;&#8744;E&#8322;</text>
+          <text x="60" y="62">E&#8321;<tspan dx="2">&#8744;</tspan><tspan dx="2">E&#8322;</tspan></text>
+          <text x="92" y="14" text-anchor="start" style="font-size: 9px">odd<tspan dx="2">&#8744;</tspan><tspan dx="2">even</tspan></text>
+          <text x="7" y="38" text-anchor="end" style="font-size: 9px">odd</text>
+          <text x="113" y="38" text-anchor="start" style="font-size: 9px">even</text>
+          <text x="92" y="62" text-anchor="start" style="font-size: 9px">odd<tspan dx="2">&#8743;</tspan><tspan dx="2">even</tspan></text>
         </g>
       </svg>
       <div class="ext-actions">
@@ -166,28 +174,31 @@
         proof exploration as parallel tasks over a lattice of e-graphs turns semantic
         awareness into raw speed.</p>
       </div>
-      <svg class="extension-img diagram" viewBox="0 0 120 70" aria-hidden="true">
+      <svg class="extension-img diagram" viewBox="-21 0 162 70" aria-hidden="true">
         <g class="vbox">
           <rect x="6" y="4" width="26" height="20" rx="7"/>
           <rect x="6" y="25" width="26" height="20" rx="7"/>
           <rect x="6" y="46" width="26" height="20" rx="7"/>
-          <rect x="88" y="4" width="24" height="62" rx="7"/>
+          <rect x="86" y="4" width="24" height="62" rx="7"/>
         </g>
         <g class="vlabel" text-anchor="middle">
           <text x="19" y="18">E&#8321;</text>
           <text x="19" y="39">E&#8322;</text>
           <text x="19" y="60">E&#8323;</text>
-          <text x="100" y="40" font-size="15">&#8744;</text>
+          <text x="98" y="40" font-size="15">&#8744;</text>
+          <text x="52" y="8" style="font-size: 9px">a = b</text>
+          <text x="52" y="29" style="font-size: 9px">c = d</text>
+          <text x="52" y="50" style="font-size: 9px">e = f</text>
         </g>
         <g class="edge">
-          <path d="M38 14 h42 m0 0 l-6 -5 m6 5 l-6 5"/>
-          <path d="M38 35 h42 m0 0 l-6 -5 m6 5 l-6 5"/>
-          <path d="M38 56 h42 m0 0 l-6 -5 m6 5 l-6 5"/>
+          <path d="M38 14 h42 m-.7 0 l-6 -5 m6 5 l-6 5"/>
+          <path d="M38 35 h42 m-.7 0 l-6 -5 m6 5 l-6 5"/>
+          <path d="M38 56 h42 m-.7 0 l-6 -5 m6 5 l-6 5"/>
         </g>
         <g class="packet">
-          <path d="M38 14 h42" pathLength="100"/>
-          <path d="M38 35 h42" pathLength="100" style="animation-delay: -0.8s"/>
-          <path d="M38 56 h42" pathLength="100" style="animation-delay: -1.6s"/>
+          <path d="M39 14 h40" pathLength="100"/>
+          <path d="M39 35 h40" pathLength="100" style="animation-delay: -0.8s"/>
+          <path d="M39 56 h40" pathLength="100" style="animation-delay: -1.6s"/>
         </g>
       </svg>
       <div class="ext-actions">
@@ -196,9 +207,9 @@
     </article>
     </div>
 
-    <p class="readmore-wrap">
+    <!-- <p class="readmore-wrap">
       <a class="readmore-btn" href="background.html">Read more &rarr;</a>
-    </p>
+    </p> -->
 
     <h2 id="publications">Publications</h2>
 
@@ -229,6 +240,7 @@
       <p class="links">
         <a href="publications/2026-versioned-egraphs.pdf">PDF</a>
         <a href="https://doi.org/10.1145/3808249">DOI</a>
+        <a href="https://www.youtube.com/watch?v=5nZc6cUwqpY&amp;t=11734" target="_blank" rel="noopener">Talk</a>
       </p>
       <details>
         <summary>Abstract</summary>
@@ -254,6 +266,7 @@
       <p class="links">
         <a href="publications/2025-disequality-graphs.pdf">PDF</a>
         <a href="https://doi.org/10.1145/3704913">DOI</a>
+        <a href="https://youtu.be/z1QSRZCJkEI" target="_blank" rel="noopener">Talk</a>
       </p>
       <details>
         <summary>Abstract</summary>
@@ -272,7 +285,7 @@
     </article>
 
     <h2 id="credits">Credits</h2>
-    <p><picture><source srcset="assets/logo-wise-dark.svg" media="(prefers-color-scheme: dark)"><img class="inline-logo" src="assets/logo-wise.svg" alt="WISE"></picture> is developed by the Programming Group at the University of St. Gallen.</p>
+    <p><picture><source srcset="assets/logo-type2-dark.svg" media="(prefers-color-scheme: dark)"><img class="inline-logo" src="assets/logo-type2.svg" alt="Smart E-Graphs"></picture> is developed by the Programming Group at the University of St. Gallen.</p>
     <div class="credit-logos">
       <a class="credit-logo" href="https://programming-group.com/" target="_blank" rel="noopener">
         <img src="assets/logo-programming-group.svg" alt="Programming Group">
@@ -289,7 +302,7 @@
 </footer>
 
 <script>
-  fetch("assets/logo-hero.svg").then(function (r) { return r.text(); }).then(function (svg) {
+  fetch("assets/logo-animated.svg").then(function (r) { return r.text(); }).then(function (svg) {
     var slot = document.getElementById("hero-logo-slot");
     if (slot) slot.outerHTML = svg;
   });
