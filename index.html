@@ -5,6 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Smart E-Graphs</title>
 <meta name="description" content="Smart e-graphs: equality is just the beginning. E-graphs that understand disequality, assumptions, and branching proofs, for provers that prove more, faster.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Smart E-Graphs">
+<meta property="og:url" content="https://prg-grp.github.io/egraphs-extensions-website/">
+<meta property="og:title" content="Smart E-Graphs">
+<meta property="og:description" content="Smart e-graphs: equality is just the beginning. E-graphs that understand disequality, assumptions, and branching proofs, for provers that prove more, faster.">
+<meta property="og:image" content="https://prg-grp.github.io/egraphs-extensions-website/assets/logo-type2.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Smart E-Graphs">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Smart E-Graphs">
+<meta name="twitter:description" content="Smart e-graphs: equality is just the beginning. E-graphs that understand disequality, assumptions, and branching proofs, for provers that prove more, faster.">
+<meta name="twitter:image" content="https://prg-grp.github.io/egraphs-extensions-website/assets/logo-type2.png">
 <link rel="preload" href="assets/logo-animated.svg" as="fetch" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
 <link rel="icon" type="image/svg+xml" href="assets/logo-base.svg">
@@ -189,6 +202,25 @@
     </p>
 
     <h2 id="publications">Publications</h2>
+
+    <article class="publication" id="publication-proof-primitives">
+      <span class="badge published">VeriLang 2026</span>
+      <h3>Proof Primitives for Equality Saturation-based Automated Provers</h3>
+      <p class="authors">George Zakhour, Jahrim Gabriele Cesario, Pascal Weisenburger, Guido Salvaneschi</p>
+      <p class="venue">VeriLang 2026, ECOOP, July 2026</p>
+      <p class="links">
+        <a href="publications/2026-proof-primitives.pdf">PDF</a>
+      </p>
+      <details>
+        <summary>Abstract</summary>
+        <p>We present a proof extraction algorithm for versioned e-graphs, an extension of
+        e-graphs that supports branching reasoning contexts and proof by cases. In the
+        setting of algebraic datatypes, the algorithm handles rewrites, congruence,
+        injectivity, contradictions, induction, and case splits. We implement it in Vegie,
+        a lightweight automated inductive theorem prover. An early case study suggests that
+        the produced proofs are smaller than those of a state-of-the-art e-graph prover.</p>
+      </details>
+    </article>
 
     <article class="publication" id="publication-versioned">
       <span class="badge published">PLDI 2026</span>
